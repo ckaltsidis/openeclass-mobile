@@ -72,8 +72,16 @@ var postdata =
     	contentType: "application/json; charset=utf-8",
         dataType: "json",
         success:function(result){
-            //alert(result[0].title);
-            //var _token=result.access_token;
+            html = '';
+			// Δημιουργώ τα αντικείμενα τις λίστας από το object result
+			$.each( result, function(k, v) {
+				li = '<li><a href="" data-ajax="false"><i class="fa fa-chevron-right"></i></i>' + v.title + '</a></li>';
+				html += li;
+			});
+			// Προσθέτω τα αντικείμενα τις λίστας στο id Content
+			$( html ).appendTo("#Content");
+			// Κάνω refresh το listview για να πάρει σωστά τη CSS
+			$("#Content").listview("refresh");
         },
         error:function(xhr,status,error){
             alert(status);
